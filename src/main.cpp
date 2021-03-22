@@ -744,18 +744,18 @@ int main(int argc, char** argv)
     wchar_t modelpath[256];
     if (noise == -1)
     {
-        swprintf(parampath, 256, L"%s/scale2.0x_model.param", model.c_str());
-        swprintf(modelpath, 256, L"%s/scale2.0x_model.bin", model.c_str());
+        swprintf(parampath, 256, L"%ls/scale2.0x_model.param", model.c_str());
+        swprintf(modelpath, 256, L"%ls/scale2.0x_model.bin", model.c_str());
     }
     else if (scale == 1)
     {
-        swprintf(parampath, 256, L"%s/noise%d_model.param", model.c_str(), noise);
-        swprintf(modelpath, 256, L"%s/noise%d_model.bin", model.c_str(), noise);
+        swprintf(parampath, 256, L"%ls/noise%d_model.param", model.c_str(), noise);
+        swprintf(modelpath, 256, L"%ls/noise%d_model.bin", model.c_str(), noise);
     }
     else if (scale == 2 || scale == 4 || scale == 8 || scale == 16 || scale == 32)
     {
-        swprintf(parampath, 256, L"%s/noise%d_scale2.0x_model.param", model.c_str(), noise);
-        swprintf(modelpath, 256, L"%s/noise%d_scale2.0x_model.bin", model.c_str(), noise);
+        swprintf(parampath, 256, L"%ls/noise%d_scale2.0x_model.param", model.c_str(), noise);
+        swprintf(modelpath, 256, L"%ls/noise%d_scale2.0x_model.bin", model.c_str(), noise);
     }
 #else
     char parampath[256];
@@ -979,3 +979,11 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+#if defined (_WIN32) && !defined(_MSC_VER)
+#include <windows.h>
+int main(int argc, char** argv)
+{
+    return wmain(argc, CommandLineToArgvW(GetCommandLineW(), &argc));
+}
+#endif

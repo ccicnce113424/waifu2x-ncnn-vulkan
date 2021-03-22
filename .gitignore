@@ -1,0 +1,5 @@
+src/.idea/
+src/cmake-*/
+src/.vs/
+src/out/
+src/CMakeSettings.json
